@@ -2,6 +2,8 @@
 
 _Gestión de Configuración del Software_
 
+---
+
 | Apellido y Nombre | Legajo |
 | :--- | :---: |
 | Peschiutta, Franco Agustín | 400831 |
