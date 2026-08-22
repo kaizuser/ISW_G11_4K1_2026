@@ -1,7 +1,9 @@
+<div align="center">
 **Grupo 11 4K1**
 
 _Gestión de Configuración del Software_
 
+</div>
 ---
 
 | Apellido y Nombre | Legajo |
