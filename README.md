@@ -4,6 +4,7 @@
 _Gestión de Configuración del Software_
 
 </div>
+
 ---
 
 | Apellido y Nombre | Legajo |
