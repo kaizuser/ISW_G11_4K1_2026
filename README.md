@@ -30,10 +30,9 @@ _Gestión de Configuración del Software_
 ## Organización del Repositorio
 
 ```text
-ICS_G3_4K4_2026/
+ISW_G11_4K1_2026/
 ├── Bibliografía/
 │   └── Libros/
-├── estructuraTP/
 ├── Informacion_Catedra/
 │   └── Material_de_Apoyo/
 │       ├── Guia_Trabajos_Practicos/
