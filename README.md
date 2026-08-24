@@ -73,7 +73,7 @@ ISW_G11_4K1_2026/
 | **Resumen Teórico** | `PP_RES_<Tema>_<Autor>.pdf` | `Producciones_Propias/Resumenes/` |
 | **Artefacto de TPG**| `TPG<N>_ART_<Nombre>.<ext>` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/TPG<N>-<Tema>/` |
 | **Resolución Final de TPG** | `TPG<N>_RESOLUCION_<Tema>.<ext>` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/TPG<N>-<Tema>/` |
-| **Documentos de TGI**| `TIG<N>_ART_<Nombre>.<ext>` | `Trabajos_Prácticos/Trabajos_Investigación_Grupales/TIG<N>-<Tema>/` |
+| **Documentos de TGI**| `TIG<N>_<Nombre>.<ext>` | `Trabajos_Prácticos/Trabajos_Investigación_Grupales/TIG<N>-<Tema>/` |
 | **Entregable Final de TIG** | `TIG<N>_ENTREGABLE_<Tema>.<ext>` | `Trabajos_Prácticos/Trabajos_Investigación_Grupales/TIG<N>-<Tema>/` |
 
 ---
@@ -85,11 +85,11 @@ ISW_G11_4K1_2026/
 | `BIB` | Bibliografía |
 | `IC` | Información de Cátedra |
 | `PP` | Producción Propia |
-| `TP` | Trabajo Práctico (Genérico) |
+| `TP` | Trabajo Práctico  |
 | `TPG` | Trabajo Práctico Grupal |
 | `TIG` | Trabajo de Investigación Grupal |
 | `C` | Clase Teórica / Práctica |
-| `ART` | Artefacto (Componente parcial de un trabajo) |
+| `ART` | Artefacto  |
 | `RES` | Resumen |
 | `TEMP` | Template / Plantilla base |
 | `ANOT` | Anotación |
