@@ -32,84 +32,83 @@ _Gestión de Configuración del Software_
 ```text
 ISW_G11_4K1_2026/
 ├── Bibliografía/
-│   └── Libros/
 ├── Informacion_Catedra/
 │   └── Material_de_Apoyo/
-│       ├── Guia_Trabajos_Practicos/
+│       ├── Guia_TrabajosPracticos/
 │       ├── Presentaciones_Clases/
 │       └── Templates/
 ├── Producciones_Propias/
-│   ├── Anotaciones_Clases/
-│   ├── Ejercicios_Resueltos/
-│   └── Resumenes/
+│   ├── Anotaciones_Clase/
+│   ├── Resúmenes/
+│   └── Ejercicios_Resueltos/
 ├── README.md
 └── Trabajos_Prácticos/
-    ├── Trabajos_Investigación_Grupales/
-    │   ├── TIG1-Expo_Investigacion_Despliegue/
-    │   └── TIG2-Poster_Cientifico_FW_Lean-Agil_Desarrollo/
+    ├── Trabajos_Investigacion_Grupales/
+    │   └── TIG<NN>-<Nombre_TP>/
     └── Trabajos_Prácticos_Grupales/
-        ├── TPG4-SCM-Herramientas_SCM/
-        ├── TPG5-SCM-Uso_Repositorio/
-        ├── TPG6-TDD/
-        ├── TPG7-SCRUM-Ejercicio_Aplicacion/
-        ├── TPG10-KANBAN-Ejercicio_Aplicacion/
-        ├── TPG11-SCRUM-Dinamica_Retrospectiva/
-        ├── TPG12-DESIGN_THINKING-Publicidad_IG/
-        └── TPG13-SCRUM-Planificacion_Release_Sprint/
+        └── TPG<NN>-<Tema_Principal>-<Nombre_Actividad>/
 ```
 
 ---
 
 ## Ítems de Configuración
 
-| Ítems de configuración | Formato del Nombre (SCI) | Ubicación en el Repositorio |
-|---|---|---|
-| **Material Bibliográfico** | `BIB_LIBRO_<Nombre_Autor>.<ext>` | `Bibliografía/Libros/` |
-| **Guía de Trabajos Prácticos** | `IC_GUIA_TP<N>_<Tema>.pdf` | `Informacion_Catedra/Material_de_Apoyo/Guia_Trabajos_Practicos/` |
-| **Presentación de Clase** | `IC_PRES_C<N>_<Tema>.pdf` | `Informacion_Catedra/Material_de_Apoyo/Presentaciones_Clases/` |
-| **Template / Plantilla** | `IC_TEMP_<Nombre_Plantilla>.<ext>` | `Informacion_Catedra/Material_de_Apoyo/Templates/` |
-| **Anotación de Clase** | `PP_ANOT_C<N>_<Tema>.<ext>` | `Producciones_Propias/Anotaciones_Clases/` |
-| **Ejercicio Resuelto** | `PP_EJ_<Tema>_<Autor>.<ext>` | `Producciones_Propias/Ejercicios_Resueltos/` |
-| **Resumen Teórico** | `PP_RES_<Tema>_<Autor>.pdf` | `Producciones_Propias/Resumenes/` |
-| **Artefacto de TPG**| `TPG<N>_ART_<Nombre>.<ext>` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/TPG<N>-<Tema>/` |
-| **Resolución Final de TPG** | `TPG<N>_RESOLUCION_<Tema>.<ext>` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/TPG<N>-<Tema>/` |
-| **Documentos de TGI**| `TIG<N>_<Nombre>.<ext>` | `Trabajos_Prácticos/Trabajos_Investigación_Grupales/TIG<N>-<Tema>/` |
-| **Entregable Final de TIG** | `TIG<N>_ENTREGABLE_<Tema>.<ext>` | `Trabajos_Prácticos/Trabajos_Investigación_Grupales/TIG<N>-<Tema>/` |
+| Nombre del Ítem de Configuración | Regla de Nombrado | Ubicación dentro del Repositorio | Tipo de Ítem [Clase / Cátedra / Propia] |
+|---|---|---|---|
+| **Plan de Gestión de Configuración** | `GRUPO11_Plan_De_Gestion_De_Configuración.pdf` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/TPG4-SCM-Herramientas_SCM/` | Producción Propia |
+| **Guía de Trabajos Prácticos** | `GRUPO11_Guia_De_TP.pdf` | `Informacion_Catedra/Material_de_Apoyo/Guia_Trabajos_Practicos/` | Cátedra |
+| **Presentaciones clase** | `GRUPO11_<NN>_<Nombre_Presentacion>.pdf/pptx` | `Informacion_Catedra/Material_de_Apoyo/Presentaciones_Clases/` | Cátedra |
+| **Ejercicios Resueltos** | `GRUPO11_EJ_<NombreEjercicio>_<Apellido>_<NroParcial>.pdf/docx` | `Producciones_Propias/Ejercicios_Resueltos/` | Producción Propia |
+| **Notas de clase** | `GRUPO11_Nota_Clase<YYYYMMDD><Apellido>.pdf/docx` | `Producciones_Propias/Anotaciones_Clases/` | Clase / Producción Propia |
+| **Template** | `GRUPO11_<Nombre_Template>.pdf/docx` | `Informacion_Catedra/Material_de_Apoyo/Templates/` | Cátedra |
+| **Resumen** | `GRUPO11_Resumen_Parcial<NN>_<Apellido>.pdf` | `Producciones_Propias/Resumenes/` | Producción Propia |
+| **Programa Materia** | `GRUPO11_Planificación_ISW.pdf` | `Informacion_Catedra/` | Cátedra |
+| **Trabajos Investigación Grupales** | `GRUPO11_Trabajo_Investigacion_Grupal_Nro_<NN>.pdf/docx` | `Trabajos_Prácticos/Trabajos_Investigación_Grupales/` | Producción Propia |
+| **Trabajos Prácticos Grupales** | `GRUPO11_Trabajo_Practico_Grupal_Nro_<NN>.pdf/docx` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/` | Producción Propia |
+| **Cronograma** | `GRUPO11_Cronograma.pdf` | `Informacion_Catedra/` | Cátedra |
+| **Libros Cátedra** | `GRUPO11_LC_<Libro_Autor>.pdf` | `Bibliografía/Libros/` | Cátedra |
+| **Artefactos Trabajos Prácticos Grupales** | `GRUPO11_<NombreArtefacto>_<Nro_TP>.<Extensión>` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/` | Producción Propia |
 
 ---
 
-## Glosario
+## Convenciones de Nombrado
 
-| Abreviatura | Significado |
+| Sigla | Significado |
 |---|---|
-| `BIB` | Bibliografía |
-| `IC` | Información de Cátedra |
-| `PP` | Producción Propia |
-| `TP` | Trabajo Práctico  |
-| `TPG` | Trabajo Práctico Grupal |
-| `TIG` | Trabajo de Investigación Grupal |
-| `C` | Clase Teórica / Práctica |
-| `ART` | Artefacto  |
-| `RES` | Resumen |
-| `TEMP` | Template / Plantilla base |
-| `ANOT` | Anotación |
-| `EJ` | Ejercicio |
-| `N` | Número secuencial identificador |
+| `<NN>` | Número cardinal comenzando en 00. |
+| `<YYYYMMDD>` | Fecha en formato numérico (Año-Mes-Día). |
+| `<Apellido>` | Apellido del autor del ítem de configuración. |
+| `<Nombre_presentacion>` | Nombre de la presentación con formato adaptado. |
+| `<Nombre_Template>` | Nombre del template con formato adaptado. |
+| `<Nombre_TP>` | Nombre del trabajo práctico de investigación con formato adaptado. |
+| `<Tema_Principal>-<Nombre_Actividad>` | Nombre del trabajo práctico grupal con formato adaptado. |
+| `<NombreEjercicio>` | Identificador del ejercicio. |
+| `<NombreArtefacto>` | Nombre del artefacto asociado a un trabajo práctico. Ej: `Historia_De_Usuario` |
+| `<Extensión>` | Nombre de la extensión de un artefacto. Ej: `py`/`pdf` |
+| `<Libro_Autor>` | Nombre del libro/material de la cátedra y el apellido del o los autores. |
+| `<Nro_TP>` | Número cardinal asociado al trabajo práctico al que hace referencia. |
 
 ---
 
 ## Criterios de Línea Base y Versionado
 
-Como equipo definimos que la **Línea Base** se establece luego de la entrega de cada trabajo práctico evaluable en cada instancia y, si corresponde, luego de su correspondiente corrección por parte de la cátedra.
+Como equipo definimos que la **Línea Base** se establece luego de la corrección de:
 
-Para mantener la trazabilidad de los hitos académicos, cada Línea Base se marcará mediante un **Tag de Git** en el repositorio utilizando una nomenclatura de versionado simplificado orientada a entregas: `v[MAJOR].[MINOR]`.
+2 (dos) Trabajos Practicos Grupales.
+
+1 (un) Trabajo de Investigación Grupal.
+
+1 (un) Parcial.
+
+Para mantener la trazabilidad de los hitos académicos, cada Línea Base se marcará mediante un **Tag de Git** en el repositorio utilizando una nomenclatura de versionado simplificado orientada a entregas.
 
 **Mecánica de Incremento:**
-*   **MAJOR:** Se incrementa de forma entera con cada Trabajo Práctico (TPG o TIG) evaluable entregado. El valor `1` corresponde al estado inicial de planificación del repositorio (antes de cualquier entrega evaluable).
-*   **MINOR:** Se incrementa exclusivamente con las correcciones, ajustes menores o *feedback* implementado sobre una versión mayor ya entregada/estable. Al incrementar el MAJOR, el MINOR se reinicia a `0`.
+Se incrementa de forma entera con cada Trabajo Práctico (TPG o TIG) evaluable entregado. El valor `1` corresponde al estado inicial de planificación del repositorio (antes de cualquier entrega evaluable).
 
-**Ejemplo de flujo del ciclo de vida:**
-1.  `v1.0` → Repositorio inicial configurado.
-2.  `v2.0` → Entrega oficial del Trabajo Práctico Grupal 4.
-3.  `v2.1` → Correcciones aplicadas al TPG4 tras la revisión del profesor.
-4.  `v3.0` → Entrega oficial del Trabajo Práctico Grupal 5.
+---
+
+**CONVENCIÓN DE MENSAJES DE COMMIT**
+
+Con el propósito de asegurar la consistencia entre contribuciones y garantizar la trazabilidad de la autoría, todo mensaje de commit deberá estructurarse de acuerdo con la siguiente guía de formato:
+
+`<Legajo>_<Apellido>_<Descripción breve del cambio>`
