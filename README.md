@@ -63,7 +63,7 @@ ICS_G3_4K4_2026/
 
 ## Ítems de Configuración
 
-| Tipo de Artefacto | Formato del Nombre (SCI) | Ubicación en el Repositorio |
+| Ítems de configuración | Formato del Nombre (SCI) | Ubicación en el Repositorio |
 |---|---|---|
 | **Material Bibliográfico** | `BIB_LIBRO_<Nombre_Autor>.<ext>` | `Bibliografía/Libros/` |
 | **Guía de Trabajos Prácticos** | `IC_GUIA_TP<N>_<Tema>.pdf` | `Informacion_Catedra/Material_de_Apoyo/Guia_Trabajos_Practicos/` |
@@ -72,9 +72,9 @@ ICS_G3_4K4_2026/
 | **Anotación de Clase** | `PP_ANOT_C<N>_<Tema>.<ext>` | `Producciones_Propias/Anotaciones_Clases/` |
 | **Ejercicio Resuelto** | `PP_EJ_<Tema>_<Autor>.<ext>` | `Producciones_Propias/Ejercicios_Resueltos/` |
 | **Resumen Teórico** | `PP_RES_<Tema>_<Autor>.pdf` | `Producciones_Propias/Resumenes/` |
-| **Artefacto de TPG** (Código, UML)| `TPG<N>_ART_<Nombre>.<ext>` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/TPG<N>-<Tema>/` |
+| **Artefacto de TPG**| `TPG<N>_ART_<Nombre>.<ext>` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/TPG<N>-<Tema>/` |
 | **Resolución Final de TPG** | `TPG<N>_RESOLUCION_<Tema>.<ext>` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/TPG<N>-<Tema>/` |
-| **Artefacto de TIG** (Documentos)| `TIG<N>_ART_<Nombre>.<ext>` | `Trabajos_Prácticos/Trabajos_Investigación_Grupales/TIG<N>-<Tema>/` |
+| **Documentos de TGI**| `TIG<N>_ART_<Nombre>.<ext>` | `Trabajos_Prácticos/Trabajos_Investigación_Grupales/TIG<N>-<Tema>/` |
 | **Entregable Final de TIG** | `TIG<N>_ENTREGABLE_<Tema>.<ext>` | `Trabajos_Prácticos/Trabajos_Investigación_Grupales/TIG<N>-<Tema>/` |
 
 ---
