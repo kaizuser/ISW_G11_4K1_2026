@@ -111,7 +111,7 @@ Para mantener la trazabilidad de los hitos académicos, cada Línea Base se marc
 
 Siendo <NN> Número cardinal comenzando en 01 y <EVENTO> corresponde a alguno de los ítems que fueron usados como criterio de la línea base (P1/P2; TIG1/TIG2; TPG4/TPG7/TPG6/TPG10/TPG12/TPG11/TPG5).
 
-**CONVENCIÓN DE MENSAJES DE COMMIT**
+## Convención de Mensajes de Commit
 
 Con el propósito de asegurar la consistencia entre contribuciones y garantizar la trazabilidad de la autoría, todo mensaje de commit deberá estructurarse de acuerdo con la siguiente guía de formato:
 
