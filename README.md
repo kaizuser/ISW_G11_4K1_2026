@@ -44,9 +44,12 @@ ISW_G11_4K1_2026/
 ├── README.md
 └── Trabajos_Prácticos/
     ├── Trabajos_Investigacion_Grupales/
-    │   └── TIG<NN>-<Nombre_TP>/
+    │   └── TIG<N/NN>-<Nombre_TP>/
     └── Trabajos_Prácticos_Grupales/
-        └── TPG<NN>-<Tema_Principal>-<Nombre_Actividad>/
+        ├── No_Evaluables/
+        |   └── TPG<N/NN>-<Tema_Principal>-<Nombre_Actividad>/
+        └── Evaluables/
+            └── TPG<N/NN>-<Tema_Principal>-<Nombre_Actividad>/
 ```
 
 ---
@@ -55,7 +58,7 @@ ISW_G11_4K1_2026/
 
 | Nombre del Ítem de Configuración | Regla de Nombrado | Ubicación dentro del Repositorio | Tipo de Ítem [Clase / Cátedra / Propia] |
 |---|---|---|---|
-| **Plan de Gestión de Configuración** | `GRUPO11_Plan_De_Gestion_De_Configuración.pdf` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/TPG4-SCM-Herramientas_SCM/` | Producción Propia |
+| **Plan de Gestión de Configuración** | `GRUPO11_Plan_De_Gestion_De_Configuración.pdf` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/Evaluables/TPG4-SCM-Herramientas_SCM/` | Producción Propia |
 | **Guía de Trabajos Prácticos** | `GRUPO11_Guia_De_TP.pdf` | `Informacion_Catedra/Material_de_Apoyo/Guia_Trabajos_Practicos/` | Cátedra |
 | **Presentaciones clase** | `GRUPO11_<NN>_<Nombre_Presentacion>.pdf/pptx` | `Informacion_Catedra/Material_de_Apoyo/Presentaciones_Clases/` | Cátedra |
 | **Ejercicios Resueltos** | `GRUPO11_EJ_<NombreEjercicio>_<Apellido>_<NroParcial>.pdf/docx` | `Producciones_Propias/Ejercicios_Resueltos/` | Producción Propia |
@@ -64,9 +67,10 @@ ISW_G11_4K1_2026/
 | **Resumen** | `GRUPO11_Resumen_Parcial<NN>_<Apellido>.pdf` | `Producciones_Propias/Resumenes/` | Producción Propia |
 | **Programa Materia** | `GRUPO11_Planificación_ISW.pdf` | `Informacion_Catedra/` | Cátedra |
 | **Trabajos Investigación Grupales** | `GRUPO11_Trabajo_Investigacion_Grupal_Nro_<NN>.pdf/docx` | `Trabajos_Prácticos/Trabajos_Investigación_Grupales/` | Producción Propia |
-| **Trabajos Prácticos Grupales** | `GRUPO11_Trabajo_Practico_Grupal_Nro_<NN>.pdf/docx` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/` | Producción Propia |
+| **Trabajos Prácticos Grupales (Evaluables)** | `GRUPO11_Trabajo_Practico_Grupal_Nro_<NN>.pdf/docx` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/Evaluables/` | Producción Propia |
+| **Trabajos Prácticos Grupales (No Evaluables)** | `GRUPO11_Trabajo_Practico_Grupal_Nro_<NN>.pdf/docx` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/No_Evaluables/` | Producción Propia |
 | **Cronograma** | `GRUPO11_Cronograma.pdf` | `Informacion_Catedra/` | Cátedra |
-| **Libros Cátedra** | `GRUPO11_LC_<Libro_Autor>.pdf` | `Bibliografía/Libros/` | Cátedra |
+| **Libros Cátedra** | `GRUPO11_LC_<Libro_Autor>.pdf` | `Bibliografía/` | Cátedra |
 | **Artefactos Trabajos Prácticos Grupales** | `GRUPO11_<NombreArtefacto>_<Nro_TP>.<Extensión>` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/` | Producción Propia |
 
 ---
@@ -75,39 +79,39 @@ ISW_G11_4K1_2026/
 
 | Sigla | Significado |
 |---|---|
-| `<NN>` | Número cardinal comenzando en 00. |
+| `<NN>` | Número cardinal comenzando en 01. |
+| `<N/NN>` | Número cardinal comenzando en 1 y que pasa a dos dígitos al llegar a 10 (Sólo para resumir los directorios de cada TP en la estructura propia del README.md). |
 | `<YYYYMMDD>` | Fecha en formato numérico (Año-Mes-Día). |
 | `<Apellido>` | Apellido del autor del ítem de configuración. |
-| `<Nombre_presentacion>` | Nombre de la presentación con formato adaptado. |
+| `<Nombre_Presentacion>` | Nombre de la presentación con formato adaptado. |
 | `<Nombre_Template>` | Nombre del template con formato adaptado. |
 | `<Nombre_TP>` | Nombre del trabajo práctico de investigación con formato adaptado. |
 | `<Tema_Principal>-<Nombre_Actividad>` | Nombre del trabajo práctico grupal con formato adaptado. |
 | `<NombreEjercicio>` | Identificador del ejercicio. |
-| `<NombreArtefacto>` | Nombre del artefacto asociado a un trabajo práctico. Ej: `Historia_De_Usuario` |
+| `<Nombre_Artefacto>` | Nombre del artefacto asociado a un trabajo práctico. Ej: `Historia_De_Usuario` |
 | `<Extensión>` | Nombre de la extensión de un artefacto. Ej: `py`/`pdf` |
-| `<Libro_Autor>` | Nombre del libro/material de la cátedra y el apellido del o los autores. |
+| `<Libro_Autor_Autor_...>` | Nombre del libro/material de la cátedra y el apellido del o los autores. |
 | `<Nro_TP>` | Número cardinal asociado al trabajo práctico al que hace referencia. |
 
 ---
 
-## Criterios de Línea Base y Versionado
+## Criterios de Línea Base
 
 Como equipo definimos que la **Línea Base** se establece luego de la corrección de:
 
-2 (dos) Trabajos Practicos Grupales.
+- 2 (dos) Trabajos Prácticos Grupales.
 
-1 (un) Trabajo de Investigación Grupal.
+- 1 (un) Trabajo de Investigación Grupal.
 
-1 (un) Parcial.
+- 1 (un) Parcial.
 
-Para mantener la trazabilidad de los hitos académicos, cada Línea Base se marcará mediante un **Tag de Git** en el repositorio utilizando una nomenclatura de versionado simplificado orientada a entregas.
+Para mantener la trazabilidad de los hitos académicos, cada Línea Base se marcará mediante un **Tag de Git** en el repositorio utilizando una nomenclatura de versionado simplificado orientada a entregas que tendrá la siguiente estructura:
 
-**Mecánica de Incremento:**
-Se incrementa de forma entera con cada Trabajo Práctico (TPG o TIG) evaluable entregado. El valor `1` corresponde al estado inicial de planificación del repositorio (antes de cualquier entrega evaluable).
+`GRUPO11_LINEABASE_<NN>_<EVENTO>`
 
----
+Siendo <NN> Número cardinal comenzando en 01 y <EVENTO> corresponde a alguno de los ítems que fueron usados como criterio de la línea base (P1/P2; TIG1/TIG2; TPG4/TPG7/TPG6/TPG10/TPG12/TPG11/TPG5).
 
-**CONVENCIÓN DE MENSAJES DE COMMIT**
+## Convención de Mensajes de Commit
 
 Con el propósito de asegurar la consistencia entre contribuciones y garantizar la trazabilidad de la autoría, todo mensaje de commit deberá estructurarse de acuerdo con la siguiente guía de formato:
 
