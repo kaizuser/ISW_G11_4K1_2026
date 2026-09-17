@@ -33,6 +33,7 @@ _Gestión de Configuración del Software_
 ISW_G11_4K1_2026/
 ├── Bibliografía/
 ├── Informacion_Catedra/
+│   ├── Clases_Grabadas/
 │   └── Material_de_Apoyo/
 │       ├── Guia_TrabajosPracticos/
 │       ├── Presentaciones_Clases/
@@ -71,7 +72,7 @@ ISW_G11_4K1_2026/
 | **Trabajos Prácticos Grupales (No Evaluables)** | `GRUPO11_Trabajo_Practico_Grupal_Nro_<NN>.pdf/docx` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/No_Evaluables/` | Producción Propia |
 | **Cronograma** | `GRUPO11_Cronograma.pdf` | `Informacion_Catedra/` | Cátedra |
 | **Libros Cátedra** | `GRUPO11_LC_<Libro_Autor>.pdf` | `Bibliografía/` | Cátedra |
-| **Artefactos Trabajos Prácticos Grupales** | `GRUPO11_<NombreArtefacto>_<Nro_TP>.<Extensión>` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/` | Producción Propia |
+| **Artefactos Trabajos Prácticos Grupales** | `GRUPO11_<NombreArtefacto>_<Nro_TP>.py/pdf/pptx` | `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/` | Producción Propia |
 
 ---
 
@@ -89,7 +90,6 @@ ISW_G11_4K1_2026/
 | `<Tema_Principal>-<Nombre_Actividad>` | Nombre del trabajo práctico grupal con formato adaptado. |
 | `<NombreEjercicio>` | Identificador del ejercicio. |
 | `<Nombre_Artefacto>` | Nombre del artefacto asociado a un trabajo práctico. Ej: `Historia_De_Usuario` |
-| `<Extensión>` | Nombre de la extensión de un artefacto. Ej: `py`/`pdf` |
 | `<Libro_Autor_Autor_...>` | Nombre del libro/material de la cátedra y el apellido del o los autores. |
 | `<Nro_TP>` | Número cardinal asociado al trabajo práctico al que hace referencia. |
 
