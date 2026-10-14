@@ -1,0 +1,36 @@
+services:
+  postgres:
+    image: postgres:18-alpine
+    container_name: isw_ecoharmony_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-isw_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-isw_password}
+      POSTGRES_DB: ${DB_NAME:-ecoharmony_db}
+      POSTGRES_TEST_DB: ${DB_NAME_TEST:-ecoharmony_test}
+    ports:
+      # Host port 5440 avoids clashing with a local PostgreSQL install; the container always listens on 5432.
+      - "${DB_PORT:-5440}:5432"
+    volumes:
+      # PostgreSQL 18+ stores data under /var/lib/postgresql/<major>/docker.
+      - pgdata18:/var/lib/postgresql
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  mailpit:
+    image: axllent/mailpit:v1.31.5
+    container_name: isw_ecoharmony_mailpit
+    restart: unless-stopped
+    ports:
+      - "${MAILPIT_SMTP_PORT:-1025}:1025" # SMTP receiver
+      - "${MAILPIT_HTTP_PORT:-8025}:8025" # Web UI and REST API
+    environment:
+      MP_MAX_MESSAGES: 500
+
+volumes:
+  pgdata18:
+    driver: local
