@@ -1,0 +1,11 @@
+{
+  "displayName": "e2e",
+  "rootDir": "..",
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "testMatch": ["<rootDir>/test/e2e/**/*.e2e-spec.ts"],
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "testEnvironment": "node",
+  "passWithNoTests": true
+}
