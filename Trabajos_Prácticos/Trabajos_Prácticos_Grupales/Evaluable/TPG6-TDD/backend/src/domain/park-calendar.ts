@@ -1,9 +1,16 @@
 const MONDAY = 1;
 const HOLIDAYS = ['12-25', '01-01'];
 
-export function isOpenOn(visitDate: string): boolean {
-  const weekday = new Date(`${visitDate}T00:00:00Z`).getUTCDay();
-  const monthAndDay = visitDate.slice(5);
+// Parsed as UTC midnight so the weekday doesn't shift with the server's timezone.
+function weekdayOf(isoDate: string): number {
+  return new Date(`${isoDate}T00:00:00Z`).getUTCDay();
+}
 
-  return weekday !== MONDAY && !HOLIDAYS.includes(monthAndDay);
+function isHoliday(isoDate: string): boolean {
+  const monthAndDay = isoDate.slice(5);
+  return HOLIDAYS.includes(monthAndDay);
+}
+
+export function isOpenOn(visitDate: string): boolean {
+  return weekdayOf(visitDate) !== MONDAY && !isHoliday(visitDate);
 }
