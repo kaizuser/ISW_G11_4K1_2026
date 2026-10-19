@@ -3,8 +3,8 @@ import {
   discountPercentFor,
   priceFor,
   subtotalFor,
-} from '../../../src/domain/pricing';
-import { PassType } from '../../../src/domain/types';
+} from '../../src/domain/pricing';
+import { PassType } from '../../src/domain/types';
 
 describe('CA-06 pass prices', () => {
   it('should cost 10.000 when the pass is REGULAR', () => {
