@@ -119,7 +119,7 @@ Precios de referencia: REGULAR $10.000 y VIP $20.000. Salvo indicación, los vis
 | **PU-OF-01** | Compra válida con tarjeta | Usuario registrado, día abierto, menos de 10 entradas con edad y pase, pago con tarjeta | Redirección a la pantalla de Mercado Pago; al aprobar, compra `CONFIRMADA` y correo visible en la bandeja con QR y PDF | CA-01 a CA-10, RC-01 | **PASA** |
 | **PU-OF-02** | Sin medio de pago | Entradas válidas sin forma de pago | Rechazo por validación | CA-07 | **FALLA** |
 | **PU-OF-03** | Parque cerrado | Fecha en lunes, 25/12 o 01/01 | Rechazo por parque cerrado | CA-04 | **FALLA** |
-| **PU-OF-04** | Más de 10 entradas | 11 entradas | Rechazo por cantidad | CA-02 | **FALLA** |
+| **PU-OF-04** | Más de 10 entradas | 11 entradas o mas | Rechazo por cantidad | CA-02 | **FALLA** |
 
 ### 5.2. Extendidas (FAQ y precisiones del equipo)
 
