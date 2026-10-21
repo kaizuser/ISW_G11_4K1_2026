@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { DomainError } from '../domain/errors';
 import { availableDates, validateVisitDate } from '../domain/park-calendar';
 import { Purchase, Ticket, type TicketRequest } from '../domain/purchase';
-import { PaymentMethod, type PurchaseStatus } from '../domain/types';
+import { PassType, PaymentMethod, PurchaseStatus } from '../domain/types';
 import type { Dependencies, EmailKind } from './dependencies';
 
 const MAX_TICKETS_PER_DATE = 10;
@@ -151,5 +151,84 @@ function summaryOf(purchase: Purchase, redirectUrl?: string): PurchaseSummary {
     total: purchase.total(),
     status: purchase.status,
     redirectUrl,
+  };
+}
+
+export interface PurchaseEmailView {
+  kind: EmailKind;
+  to: string;
+  subject: string;
+  intro: string;
+  orderNumber: string;
+  visitDate: string;
+  paymentMethod: PaymentMethod;
+  status: PurchaseStatus;
+  tickets: {
+    passType: PassType;
+    visitorAge: number;
+    listPrice: number;
+    discountPercent: number;
+    subtotal: number;
+  }[];
+  total: number;
+  accessCode?: string;
+  attachmentName?: string;
+}
+
+const EMAIL_KIND_BY_STATUS: Partial<Record<PurchaseStatus, EmailKind>> = {
+  [PurchaseStatus.CONFIRMADA_PAGO_EN_BOLETERIA]: 'CASH_RESERVATION',
+  [PurchaseStatus.CONFIRMADA]: 'PURCHASE_CONFIRMED',
+  [PurchaseStatus.RECHAZADA]: 'PAYMENT_REJECTED',
+};
+
+/** The email sent for the purchase in its current status, built from the stored purchase. */
+export function getPurchaseEmail(
+  purchaseId: string,
+  deps: Dependencies,
+): PurchaseEmailView {
+  const purchase = findPurchaseOrFail(purchaseId, deps);
+  const user = deps.repository.findUser(purchase.userId);
+  const kind = EMAIL_KIND_BY_STATUS[purchase.status];
+  if (!user || !kind) throw new DomainError('EMAIL_NOT_AVAILABLE');
+
+  const orderNumber = `ECO-${purchase.id.slice(0, 8).toUpperCase()}`;
+  const total = purchase.total();
+  const content: Record<EmailKind, { subject: string; intro: string }> = {
+    CASH_RESERVATION: {
+      subject: 'Tu reserva está registrada · EcoHarmony Park',
+      intro: `Tu reserva está registrada. Paga $ ${total.toLocaleString('es-AR')} en boletería el día de tu visita presentando este código QR.`,
+    },
+    PURCHASE_CONFIRMED: {
+      subject: 'Confirmación de tu compra · EcoHarmony Park',
+      intro:
+        'Tu compra está confirmada. Presenta este código QR en el ingreso del parque el día de tu visita.',
+    },
+    PAYMENT_REJECTED: {
+      subject: 'Tu pago fue rechazado · EcoHarmony Park',
+      intro:
+        'No pudimos procesar el pago de tu compra. Las entradas quedaron liberadas y puedes intentarlo nuevamente.',
+    },
+  };
+
+  return {
+    kind,
+    to: user.email,
+    ...content[kind],
+    orderNumber,
+    visitDate: purchase.visitDate,
+    paymentMethod: purchase.paymentMethod,
+    status: purchase.status,
+    tickets: purchase.tickets.map((ticket) => ({
+      passType: ticket.passType,
+      visitorAge: ticket.visitorAge,
+      listPrice: ticket.listPrice,
+      discountPercent: ticket.discountPercent,
+      subtotal: ticket.subtotal(),
+    })),
+    total,
+    accessCode: purchase.accessCode,
+    attachmentName: purchase.accessCode
+      ? `comprobante-${orderNumber}.pdf`
+      : undefined,
   };
 }

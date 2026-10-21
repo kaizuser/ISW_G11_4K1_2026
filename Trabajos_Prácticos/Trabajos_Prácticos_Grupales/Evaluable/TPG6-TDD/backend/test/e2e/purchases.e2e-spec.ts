@@ -163,3 +163,39 @@ describe('frontend support endpoints', () => {
     });
   });
 });
+
+describe('simulated email', () => {
+  async function aCashPurchase() {
+    const created = await request(app)
+      .post('/api/purchases')
+      .send(aPurchase({ paymentMethod: 'EFECTIVO' }));
+    return (created.body as { purchaseId: string }).purchaseId;
+  }
+
+  it('should return the email with its QR code and attachment link', async () => {
+    const purchaseId = await aCashPurchase();
+
+    const response = await request(app).get(
+      `/api/purchases/${purchaseId}/email`,
+    );
+    const email = response.body as { qrCode: string; attachmentUrl: string };
+
+    expect(response.status).toBe(200);
+    expect(email.qrCode).toMatch(/^data:image\/png;base64,/);
+    expect(email.attachmentUrl).toBe(`/api/purchases/${purchaseId}/receipt`);
+  });
+
+  it('should download the receipt as a PDF', async () => {
+    const purchaseId = await aCashPurchase();
+
+    const response = await request(app)
+      .get(`/api/purchases/${purchaseId}/receipt`)
+      .buffer(true);
+
+    expect(response.status).toBe(200);
+    expect(response.headers['content-type']).toContain('application/pdf');
+    expect(response.headers['content-disposition']).toContain(
+      'comprobante-ECO-',
+    );
+  });
+});

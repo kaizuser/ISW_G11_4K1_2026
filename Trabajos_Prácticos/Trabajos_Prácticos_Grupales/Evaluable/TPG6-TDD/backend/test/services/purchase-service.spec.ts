@@ -9,6 +9,7 @@ import { InMemoryRepository } from '../../src/infra/in-memory-repository';
 import type { Dependencies } from '../../src/services/dependencies';
 import {
   getAvailableDates,
+  getPurchaseEmail,
   processPaymentResult,
   purchaseTickets,
   quotePurchase,
@@ -251,5 +252,54 @@ describe('quote and available dates', () => {
     await purchaseTickets(ana.id, aRequest({ tickets: adults(7) }), deps);
 
     expect(getAvailableDates(ana.id, deps)).toContain(aSaturday);
+  });
+});
+
+describe('CA-09 confirmation email content', () => {
+  it('should build the box office reservation email with QR and receipt for a cash purchase', async () => {
+    const { purchaseId } = await purchaseTickets(
+      ana.id,
+      aRequest({ paymentMethod: PaymentMethod.EFECTIVO, tickets: adults(2) }),
+      deps,
+    );
+
+    const email = getPurchaseEmail(purchaseId, deps);
+
+    expect(email).toMatchObject({
+      kind: 'CASH_RESERVATION',
+      to: ana.email,
+      total: 20_000,
+    });
+    expect(email.tickets).toHaveLength(2);
+    expect(email.accessCode).toBeDefined();
+    expect(email.attachmentName).toMatch(/^comprobante-ECO-.+\.pdf$/);
+  });
+
+  it('should build the confirmation email once the card payment is approved', async () => {
+    const { purchaseId } = await purchaseTickets(ana.id, aRequest(), deps);
+    await processPaymentResult(purchaseId, true, deps);
+
+    expect(getPurchaseEmail(purchaseId, deps)).toMatchObject({
+      kind: 'PURCHASE_CONFIRMED',
+    });
+  });
+
+  it('should build the rejection notice without QR or receipt', async () => {
+    const { purchaseId } = await purchaseTickets(ana.id, aRequest(), deps);
+    await processPaymentResult(purchaseId, false, deps);
+
+    const email = getPurchaseEmail(purchaseId, deps);
+
+    expect(email.kind).toBe('PAYMENT_REJECTED');
+    expect(email.accessCode).toBeUndefined();
+    expect(email.attachmentName).toBeUndefined();
+  });
+
+  it('should have no email while the card payment is pending', async () => {
+    const { purchaseId } = await purchaseTickets(ana.id, aRequest(), deps);
+
+    expect(() => getPurchaseEmail(purchaseId, deps)).toThrow(
+      expect.objectContaining({ code: 'EMAIL_NOT_AVAILABLE' }),
+    );
   });
 });

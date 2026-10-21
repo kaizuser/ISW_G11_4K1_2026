@@ -8,7 +8,8 @@ export type ErrorCode =
   | 'INVALID_VISITOR_AGE'
   | 'TICKET_LIMIT_PER_DATE_EXCEEDED'
   | 'PURCHASE_NOT_FOUND'
-  | 'PURCHASE_ALREADY_FINALIZED';
+  | 'PURCHASE_ALREADY_FINALIZED'
+  | 'EMAIL_NOT_AVAILABLE';
 
 export class DomainError extends Error {
   readonly code: ErrorCode;

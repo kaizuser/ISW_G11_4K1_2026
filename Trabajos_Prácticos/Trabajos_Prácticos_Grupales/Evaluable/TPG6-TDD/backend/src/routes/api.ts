@@ -2,10 +2,12 @@ import { Router, type ErrorRequestHandler } from 'express';
 import { z } from 'zod';
 import { DomainError, type ErrorCode } from '../domain/errors';
 import { PassType, PaymentMethod } from '../domain/types';
+import { qrDataUrl, receiptPdf } from '../infra/email-attachments';
 import type { Dependencies } from '../services/dependencies';
 import {
   getAvailableDates,
   getPurchase,
+  getPurchaseEmail,
   processPaymentResult,
   purchaseTickets,
   quotePurchase,
@@ -40,6 +42,7 @@ const HTTP_STATUS: Record<ErrorCode, number> = {
   USER_NOT_REGISTERED: 403,
   PURCHASE_NOT_FOUND: 404,
   PURCHASE_ALREADY_FINALIZED: 409,
+  EMAIL_NOT_AVAILABLE: 404,
   VISIT_DATE_IN_PAST: 422,
   VISIT_DATE_BEYOND_HORIZON: 422,
   SAME_DAY_CUTOFF_EXCEEDED: 422,
@@ -77,6 +80,26 @@ export function createApiRouter(
 
   router.get('/purchases/:id', (req, res) => {
     res.json(getPurchase(req.params.id, deps));
+  });
+
+  router.get('/purchases/:id/email', async (req, res) => {
+    const email = getPurchaseEmail(req.params.id, deps);
+    res.json({
+      ...email,
+      qrCode: email.accessCode ? await qrDataUrl(email.accessCode) : undefined,
+      attachmentUrl: email.attachmentName
+        ? `/api/purchases/${req.params.id}/receipt`
+        : undefined,
+    });
+  });
+
+  router.get('/purchases/:id/receipt', async (req, res) => {
+    const email = getPurchaseEmail(req.params.id, deps);
+    if (!email.attachmentName) throw new DomainError('EMAIL_NOT_AVAILABLE');
+    res
+      .type('application/pdf')
+      .attachment(email.attachmentName)
+      .send(await receiptPdf(email));
   });
 
   return router;
