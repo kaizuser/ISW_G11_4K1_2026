@@ -109,8 +109,15 @@ export function quotePurchase(tickets: TicketRequest[]): Quote {
   };
 }
 
-export function getAvailableDates(deps: Dependencies): string[] {
-  return availableDates(deps.clock.parkNow());
+// Dates where the user already has 10 active tickets are left out, since nothing more fits (FAQ 27).
+export function getAvailableDates(
+  userId: string,
+  deps: Dependencies,
+): string[] {
+  return availableDates(deps.clock.parkNow()).filter(
+    (date) =>
+      deps.repository.countActiveTickets(userId, date) < MAX_TICKETS_PER_DATE,
+  );
 }
 
 function findPurchaseOrFail(purchaseId: string, deps: Dependencies): Purchase {

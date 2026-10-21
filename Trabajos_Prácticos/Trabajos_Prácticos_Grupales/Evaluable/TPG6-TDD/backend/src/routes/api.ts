@@ -49,6 +49,7 @@ const HTTP_STATUS: Record<ErrorCode, number> = {
   TICKET_LIMIT_PER_DATE_EXCEEDED: 422,
 };
 
+/** Every endpoint of the API. The session is simulated (FAQ 19): sessionUserId is the visitor. */
 export function createApiRouter(
   deps: Dependencies,
   sessionUserId: string,
@@ -56,7 +57,7 @@ export function createApiRouter(
   const router = Router();
 
   router.get('/calendar/available-dates', (_req, res) => {
-    res.json({ dates: getAvailableDates(deps) });
+    res.json({ dates: getAvailableDates(sessionUserId, deps) });
   });
 
   router.post('/purchases/quote', (req, res) => {

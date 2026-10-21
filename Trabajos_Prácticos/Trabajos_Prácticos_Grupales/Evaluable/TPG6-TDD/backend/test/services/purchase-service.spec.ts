@@ -23,7 +23,7 @@ import {
 const ana = {
   id: 'visitor-1',
   email: 'ana.perez@correo.com',
-  name: 'Ana PÃ©rez',
+  name: 'Ana Pérez',
 };
 const aFridayMorning = { date: '2026-10-16', time: '10:00' };
 const aSaturday = '2026-10-17';
@@ -238,6 +238,18 @@ describe('quote and available dates', () => {
   });
 
   it('should list available dates from the clock', () => {
-    expect(getAvailableDates(deps).at(0)).toBe(aFridayMorning.date);
+    expect(getAvailableDates(ana.id, deps).at(0)).toBe(aFridayMorning.date);
+  });
+
+  it('should leave out a date when the user already has 10 tickets for it', async () => {
+    await purchaseTickets(ana.id, aRequest({ tickets: adults(10) }), deps);
+
+    expect(getAvailableDates(ana.id, deps)).not.toContain(aSaturday);
+  });
+
+  it('should keep a date when the user still has tickets left for it', async () => {
+    await purchaseTickets(ana.id, aRequest({ tickets: adults(7) }), deps);
+
+    expect(getAvailableDates(ana.id, deps)).toContain(aSaturday);
   });
 });
