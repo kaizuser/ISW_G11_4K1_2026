@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import {
   ApiError,
   createPurchase,
@@ -24,6 +25,7 @@ function newVisitor(): Visitor {
 }
 
 export function PurchasePage() {
+  const navigate = useNavigate();
   const [availableDates, setAvailableDates] = useState<string[]>([]);
   const [visitDate, setVisitDate] = useState<string>();
   const [visitors, setVisitors] = useState<Visitor[]>(() => [newVisitor()]);
@@ -81,7 +83,7 @@ export function PurchasePage() {
     setError(undefined);
     try {
       const result = await createPurchase({ visitDate, tickets, paymentMethod });
-      window.location.assign(result.redirectUrl ?? `/compras/${result.purchaseId}`);
+      void navigate(result.redirectUrl ?? `/compras/${result.purchaseId}`);
     } catch (caught) {
       setError(
         caught instanceof ApiError

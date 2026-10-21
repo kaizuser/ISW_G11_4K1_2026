@@ -29,3 +29,7 @@ export function formatVisitDate(isoDate: string): string {
 export function isValidAge(age: string): boolean {
   return /^\d+$/.test(age);
 }
+
+export function ticketsLabel(count: number): string {
+  return count === 1 ? '1 entrada' : `${count} entradas`;
+}

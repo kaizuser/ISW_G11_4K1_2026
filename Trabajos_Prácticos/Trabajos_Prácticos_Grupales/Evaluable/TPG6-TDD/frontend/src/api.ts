@@ -17,13 +17,33 @@ export interface PurchaseRequest {
   paymentMethod: PaymentMethod;
 }
 
+export type PurchaseStatus =
+  | 'PENDIENTE_PAGO'
+  | 'CONFIRMADA'
+  | 'CONFIRMADA_PAGO_EN_BOLETERIA'
+  | 'RECHAZADA';
+
 export interface PurchaseResult {
   purchaseId: string;
   visitDate: string;
   ticketCount: number;
   total: number;
-  status: string;
+  status: PurchaseStatus;
   redirectUrl?: string;
+}
+
+export interface PurchaseEmail {
+  to: string;
+  subject: string;
+  intro: string;
+  orderNumber: string;
+  visitDate: string;
+  paymentMethod: PaymentMethod;
+  tickets: { passType: PassType; visitorAge: number; discountPercent: number; subtotal: number }[];
+  total: number;
+  qrCode?: string;
+  attachmentUrl?: string;
+  attachmentName?: string;
 }
 
 const errorMessages: Record<string, string> = {
@@ -37,13 +57,16 @@ const errorMessages: Record<string, string> = {
   INVALID_VISITOR_AGE: 'Revisa las edades: deben ser números enteros desde 0.',
   TICKET_LIMIT_PER_DATE_EXCEEDED:
     'Superas el máximo de 10 entradas para esa fecha, sumando tus compras anteriores.',
+  PURCHASE_NOT_FOUND: 'No encontramos esa compra.',
+  PURCHASE_ALREADY_FINALIZED: 'El pago de esta compra ya fue procesado.',
+  EMAIL_NOT_AVAILABLE: 'Todavía no enviamos un correo para esta compra.',
 };
 
 export class ApiError extends Error {
   readonly code: string;
 
   constructor(code: string) {
-    super(errorMessages[code] ?? 'No se pudo completar la compra. Intenta nuevamente.');
+    super(errorMessages[code] ?? 'Algo salió mal. Intenta nuevamente.');
     this.code = code;
   }
 }
@@ -78,4 +101,19 @@ export function createPurchase(purchase: PurchaseRequest): Promise<PurchaseResul
     method: 'POST',
     body: JSON.stringify(purchase),
   });
+}
+
+export function getPurchase(purchaseId: string): Promise<PurchaseResult> {
+  return request<PurchaseResult>(`/api/purchases/${purchaseId}`);
+}
+
+export function sendPaymentResult(purchaseId: string, approved: boolean): Promise<PurchaseResult> {
+  return request<PurchaseResult>(`/api/purchases/${purchaseId}/payment-result`, {
+    method: 'POST',
+    body: JSON.stringify({ approved }),
+  });
+}
+
+export function getPurchaseEmail(purchaseId: string): Promise<PurchaseEmail> {
+  return request<PurchaseEmail>(`/api/purchases/${purchaseId}/email`);
 }

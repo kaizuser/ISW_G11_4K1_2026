@@ -18,4 +18,12 @@
   --color-berry-dark: #9e3436;
   --color-paper: #fffdf7;
   --color-line: #e2d8bc;
+
+  /* Simulated external screens (Mercado Pago checkout, email client): neutral on purpose */
+  --color-sim-surface: #eef0f3;
+  --color-sim-ink: #1f2328;
+  --color-sim-muted: #555b65;
+  --color-sim-line: #dadde2;
+  --color-sim-blue: #2563c9;
+  --color-sim-badge: #ffe58f;
 }
