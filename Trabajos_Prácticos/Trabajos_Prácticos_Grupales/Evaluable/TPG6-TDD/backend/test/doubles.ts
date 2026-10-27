@@ -35,6 +35,6 @@ export class SpyEmailSender implements EmailSender {
 
 export class FailingEmailSender implements EmailSender {
   send(): Promise<void> {
-    return Promise.reject(new Error('Mail server unavailable'));
+    return Promise.reject(new Error('Servidor de Mail no disponible'));
   }
 }

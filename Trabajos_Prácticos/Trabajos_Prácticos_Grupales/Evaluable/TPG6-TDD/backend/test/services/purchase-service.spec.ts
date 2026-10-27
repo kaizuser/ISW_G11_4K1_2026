@@ -66,8 +66,8 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-describe('PU-OF-01 valid card purchase', () => {
-  it('should save the purchase pending payment and redirect to Mercado Pago when paying by card', async () => {
+describe('PU-OF-01 compra valida con tarjeta', () => {
+  it('debería guardar el pago de la compra como pendiente y redirigir a Mercado Pago cuando el pago es con tarjeta', async () => {
     const result = await purchaseTickets(ana.id, aRequest(), deps);
 
     expect(result.status).toBe(PurchaseStatus.PENDIENTE_PAGO);
@@ -75,13 +75,13 @@ describe('PU-OF-01 valid card purchase', () => {
     expect(repository.findPurchase(result.purchaseId)).toBeDefined();
   });
 
-  it('should not send an email until the card payment is approved', async () => {
+  it('no debería mandar un mail hasta que el pago de la tarjeta esté aprobado', async () => {
     await purchaseTickets(ana.id, aRequest(), deps);
 
     expect(emailSender.sent).toHaveLength(0);
   });
 
-  it('should confirm the purchase and email the visitor when the payment is approved', async () => {
+  it('debería confirmar la compra y notificar via email al visitante cuando el pago esté aprobado', async () => {
     const { purchaseId } = await purchaseTickets(ana.id, aRequest(), deps);
 
     const result = await processPaymentResult(purchaseId, true, deps);
@@ -93,8 +93,8 @@ describe('PU-OF-01 valid card purchase', () => {
   });
 });
 
-describe('CA-10 purchase summary', () => {
-  it('should report the ticket count, visit date and total', async () => {
+describe('CA-10 resumen de compra', () => {
+  it('debería mostrar la cantidad de tickets, la fecha de visita y el total', async () => {
     const result = await purchaseTickets(
       ana.id,
       aRequest({ tickets: adults(3) }),
@@ -109,8 +109,8 @@ describe('CA-10 purchase summary', () => {
   });
 });
 
-describe('cash purchase', () => {
-  it('should confirm for the box office and email the reservation without redirecting', async () => {
+describe('compra en efectivo', () => {
+  it('debería confirmar para la boletería y enviar un correo de reserva sin redirigir', async () => {
     const result = await purchaseTickets(
       ana.id,
       aRequest({ paymentMethod: PaymentMethod.EFECTIVO }),
@@ -126,16 +126,16 @@ describe('cash purchase', () => {
   });
 });
 
-describe('CA-01 registered users only', () => {
-  it('should reject the purchase when the user is not registered', async () => {
+describe('CA-01 solo usuarios registrados', () => {
+  it('debería rechazar la compra cuando el usuario no está registrado', async () => {
     await expect(
       purchaseTickets('unknown-user', aRequest(), deps),
     ).rejects.toThrow(expect.objectContaining({ code: 'USER_NOT_REGISTERED' }));
   });
 });
 
-describe('PU-OF-03 park closed', () => {
-  it('should reject the purchase when the park is closed on the visit date', async () => {
+describe('PU-OF-03 parque cerrado', () => {
+  it('debería rechazar la compra cuando el parque está cerrado en la fecha de visita', async () => {
     const aMonday = '2026-10-19';
 
     await expect(
@@ -144,7 +144,7 @@ describe('PU-OF-03 park closed', () => {
   });
 });
 
-describe('CA-11 ticket limit per date', () => {
+describe('CA-11 limite de tickets por fecha', () => {
   function previousPurchase(ticketCount: number) {
     return Purchase.createForCash(
       {
@@ -157,7 +157,7 @@ describe('CA-11 ticket limit per date', () => {
     );
   }
 
-  it('should reject the purchase when it exceeds 10 tickets for the date with earlier purchases', async () => {
+  it('debería rechazar la compra cuando exceda el límite de 10 tickets para la fecha con compras anteriores', async () => {
     repository.savePurchase(previousPurchase(7));
 
     await expect(
@@ -167,7 +167,7 @@ describe('CA-11 ticket limit per date', () => {
     );
   });
 
-  it('should accept the purchase when it reaches exactly 10 tickets for the date', async () => {
+  it('debería aceptar la compra cuando alcance exactamente 10 tickets para la fecha', async () => {
     repository.savePurchase(previousPurchase(7));
 
     await expect(
@@ -175,7 +175,7 @@ describe('CA-11 ticket limit per date', () => {
     ).resolves.toBeDefined();
   });
 
-  it('should not count rejected purchases toward the limit', async () => {
+  it('no debería contar las compras rechazadas para el límite', async () => {
     const { purchaseId } = await purchaseTickets(
       ana.id,
       aRequest({ tickets: adults(10) }),
@@ -189,8 +189,8 @@ describe('CA-11 ticket limit per date', () => {
   });
 });
 
-describe('RC-02 rejected card payment', () => {
-  it('should reject the purchase and notify the visitor', async () => {
+describe('RC-02 pago con tarjeta rechazado', () => {
+  it('debería rechazar la compra y notificar al visitante', async () => {
     const { purchaseId } = await purchaseTickets(ana.id, aRequest(), deps);
 
     const result = await processPaymentResult(purchaseId, false, deps);
@@ -201,15 +201,15 @@ describe('RC-02 rejected card payment', () => {
     ]);
   });
 
-  it('should fail when the purchase does not exist', async () => {
+  it('debería fallar cuando la compra no existe', async () => {
     await expect(
       processPaymentResult('unknown-purchase', true, deps),
     ).rejects.toThrow(expect.objectContaining({ code: 'PURCHASE_NOT_FOUND' }));
   });
 });
 
-describe('RC-04 email failure', () => {
-  it('should keep the purchase registered when the email cannot be sent', async () => {
+describe('RC-04 fallo al enviar correo', () => {
+  it('debería mantener la compra registrada cuando el mail no pueda ser enviado', async () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
     deps.emailSender = new FailingEmailSender();
 
@@ -225,7 +225,7 @@ describe('RC-04 email failure', () => {
 });
 
 describe('quote and available dates', () => {
-  it('should quote each ticket with its discount and the total', () => {
+  it('debería aplicar a cada ticket su descuento y el total', () => {
     const quote = quotePurchase([
       anAdult,
       { passType: PassType.VIP, visitorAge: 10 },
@@ -238,25 +238,25 @@ describe('quote and available dates', () => {
     expect(quote.total).toBe(20_000);
   });
 
-  it('should list available dates from the clock', () => {
+  it('debería listar las fechas disponibles desde el reloj', () => {
     expect(getAvailableDates(ana.id, deps).at(0)).toBe(aFridayMorning.date);
   });
 
-  it('should leave out a date when the user already has 10 tickets for it', async () => {
+  it('debería omitir una fecha cuando el usuario ya tiene 10 tickets para ella', async () => {
     await purchaseTickets(ana.id, aRequest({ tickets: adults(10) }), deps);
 
     expect(getAvailableDates(ana.id, deps)).not.toContain(aSaturday);
   });
 
-  it('should keep a date when the user still has tickets left for it', async () => {
+  it('debería mantener una fecha cuando el usuario aún tenga tickets disponibles para ella', async () => {
     await purchaseTickets(ana.id, aRequest({ tickets: adults(7) }), deps);
 
     expect(getAvailableDates(ana.id, deps)).toContain(aSaturday);
   });
 });
 
-describe('CA-09 confirmation email content', () => {
-  it('should build the box office reservation email with QR and receipt for a cash purchase', async () => {
+describe('CA-09 confirmación del contenido del mail', () => {
+  it('debería armar el mail para la reserva por boletería con QR y recibo para una compra en efectivo', async () => {
     const { purchaseId } = await purchaseTickets(
       ana.id,
       aRequest({ paymentMethod: PaymentMethod.EFECTIVO, tickets: adults(2) }),
@@ -275,7 +275,7 @@ describe('CA-09 confirmation email content', () => {
     expect(email.attachmentName).toMatch(/^comprobante-ECO-.+\.pdf$/);
   });
 
-  it('should build the confirmation email once the card payment is approved', async () => {
+  it('debería armar el mail de confirmación una vez aprobada la compra con tarjeta', async () => {
     const { purchaseId } = await purchaseTickets(ana.id, aRequest(), deps);
     await processPaymentResult(purchaseId, true, deps);
 
@@ -284,7 +284,7 @@ describe('CA-09 confirmation email content', () => {
     });
   });
 
-  it('should build the rejection notice without QR or receipt', async () => {
+  it('debería armar el aviso de rechazo sin QR ni recibo', async () => {
     const { purchaseId } = await purchaseTickets(ana.id, aRequest(), deps);
     await processPaymentResult(purchaseId, false, deps);
 
@@ -295,7 +295,7 @@ describe('CA-09 confirmation email content', () => {
     expect(email.attachmentName).toBeUndefined();
   });
 
-  it('should have no email while the card payment is pending', async () => {
+  it('no debería tener ningun mail mientras el pago con tarjeta este pendiente', async () => {
     const { purchaseId } = await purchaseTickets(ana.id, aRequest(), deps);
 
     expect(() => getPurchaseEmail(purchaseId, deps)).toThrow(
