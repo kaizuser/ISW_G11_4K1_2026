@@ -6,17 +6,17 @@ import {
 } from '../../src/domain/pricing';
 import { PassType } from '../../src/domain/types';
 
-describe('CA-06 pass prices', () => {
-  it('should cost 10.000 when the pass is REGULAR', () => {
+describe('CA-06 precios de las entradas', () => {
+  it('debería costar $10.000 cuando la entrada es REGULAR', () => {
     expect(priceFor(PassType.REGULAR)).toBe(10_000);
   });
 
-  it('should cost 20.000 when the pass is VIP', () => {
+  it('debería costar $20.000 cuando la entrada es VIP', () => {
     expect(priceFor(PassType.VIP)).toBe(20_000);
   });
 });
 
-describe('CA-12 age discounts', () => {
+describe('CA-12 descuentos por edades', () => {
   it.each([
     { age: 0, percent: 100 },
     { age: 3, percent: 100 },
@@ -26,13 +26,13 @@ describe('CA-12 age discounts', () => {
     { age: 59, percent: 0 },
     { age: 60, percent: 50 },
   ])(
-    'should apply $percent% when the visitor is $age years old',
+    'debería aplicar un descuento del $percent% cuando el visitante tenga $age años',
     ({ age, percent }) => {
       expect(discountPercentFor(age)).toBe(percent);
     },
   );
 
-  it('should apply the discount over the VIP price when the pass is VIP', () => {
+  it('debería aplicar también el descuento sobre el precio de la entrada VIP cuando la entrada es VIP', () => {
     const tenYearsOld = 10;
 
     const subtotal = subtotalFor(PassType.VIP, tenYearsOld);
