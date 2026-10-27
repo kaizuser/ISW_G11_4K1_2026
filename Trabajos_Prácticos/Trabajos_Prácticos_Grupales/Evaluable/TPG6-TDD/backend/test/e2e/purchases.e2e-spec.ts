@@ -36,8 +36,8 @@ beforeEach(() => {
   app = anApp();
 });
 
-describe('PU-OF-02 purchase without payment method', () => {
-  it('should respond 400 VALIDATION_ERROR when the payment method is missing', async () => {
+describe('PU-OF-02 compra sin metodo de pago seleccionado', () => {
+  it('debría responder 400 VALIDATION_ERROR cuando está faltando el método de pago', async () => {
     const withoutPaymentMethod = aPurchase({ paymentMethod: undefined });
 
     const response = await request(app)
@@ -49,8 +49,8 @@ describe('PU-OF-02 purchase without payment method', () => {
   });
 });
 
-describe('official user tests through the API', () => {
-  it('PU-OF-01: should register a card purchase, redirect and confirm it after payment', async () => {
+describe('tests oficiales de usuario a travez de la API', () => {
+  it('PU-OF-01: debería registrar una compra con tarjeta, redirigir y confirmarla después del pago', async () => {
     const created = await request(app).post('/api/purchases').send(aPurchase());
     const { purchaseId } = created.body as { purchaseId: string };
 
@@ -69,7 +69,7 @@ describe('official user tests through the API', () => {
     });
   });
 
-  it('PU-OF-03: should respond 422 PARK_CLOSED when the visit date is a Monday', async () => {
+  it('PU-OF-03: debería responder 422 PARK_CLOSED cuando la fecha de visita es un lunes', async () => {
     const response = await request(app)
       .post('/api/purchases')
       .send(aPurchase({ visitDate: '2026-10-19' }));
@@ -78,7 +78,7 @@ describe('official user tests through the API', () => {
     expect(response.body).toEqual({ code: 'PARK_CLOSED' });
   });
 
-  it('PU-OF-04: should respond 422 INVALID_TICKET_QUANTITY when buying more than 10 tickets', async () => {
+  it('PU-OF-04: debería responder 422 INVALID_TICKET_QUANTITY cuando se esten por comprar más de 10 tickets ', async () => {
     const elevenTickets = Array.from({ length: 11 }, () => ({
       passType: 'REGULAR',
       visitorAge: 30,
@@ -94,7 +94,7 @@ describe('official user tests through the API', () => {
 });
 
 describe('error contract', () => {
-  it('should respond 403 when the session user is not registered', async () => {
+  it('debería responder 403 cuando el usuario de la sesión no está registrado', async () => {
     const response = await request(anApp('unknown-user'))
       .post('/api/purchases')
       .send(aPurchase());
@@ -103,7 +103,7 @@ describe('error contract', () => {
     expect(response.body).toEqual({ code: 'USER_NOT_REGISTERED' });
   });
 
-  it('should respond 400 when the visit date is not a real calendar date', async () => {
+  it('debería responder 400 cuando la fecha de visita no es una fecha real', async () => {
     const response = await request(app)
       .post('/api/purchases')
       .send(aPurchase({ visitDate: '2026-02-30' }));
@@ -111,13 +111,13 @@ describe('error contract', () => {
     expect(response.status).toBe(400);
   });
 
-  it('should respond 404 when the purchase does not exist', async () => {
+  it('debería responder 404 cuando la compra no existe', async () => {
     const response = await request(app).get('/api/purchases/unknown-purchase');
 
     expect(response.status).toBe(404);
   });
 
-  it('should respond 409 when the payment result arrives twice', async () => {
+  it('debería responder 409 cuando el resultado del pago llega dos veces', async () => {
     const created = await request(app).post('/api/purchases').send(aPurchase());
     const { purchaseId } = created.body as { purchaseId: string };
     await request(app)
@@ -133,14 +133,14 @@ describe('error contract', () => {
 });
 
 describe('frontend support endpoints', () => {
-  it('should list the available dates starting today', async () => {
+  it('debería listar las fechas válidas empezando desde hoy', async () => {
     const response = await request(app).get('/api/calendar/available-dates');
 
     expect(response.status).toBe(200);
     expect((response.body as { dates: string[] }).dates[0]).toBe('2026-10-16');
   });
 
-  it('should quote the tickets with their discounts', async () => {
+  it('debería contabilizar los tickets con sus descuentos', async () => {
     const response = await request(app)
       .post('/api/purchases/quote')
       .send({ tickets: [{ passType: 'VIP', visitorAge: 65 }] });
@@ -149,7 +149,7 @@ describe('frontend support endpoints', () => {
     expect(response.body).toMatchObject({ total: 10_000 });
   });
 
-  it('should return the purchase summary', async () => {
+  it('debería devolver el resumen de la compra', async () => {
     const created = await request(app)
       .post('/api/purchases')
       .send(aPurchase({ paymentMethod: 'EFECTIVO' }));
@@ -164,7 +164,7 @@ describe('frontend support endpoints', () => {
   });
 });
 
-describe('simulated email', () => {
+describe('mail simulado', () => {
   async function aCashPurchase() {
     const created = await request(app)
       .post('/api/purchases')
@@ -172,7 +172,7 @@ describe('simulated email', () => {
     return (created.body as { purchaseId: string }).purchaseId;
   }
 
-  it('should return the email with its QR code and attachment link', async () => {
+  it('debería devolver el mail con su código QR y el enlace adjunto', async () => {
     const purchaseId = await aCashPurchase();
 
     const response = await request(app).get(
@@ -185,7 +185,7 @@ describe('simulated email', () => {
     expect(email.attachmentUrl).toBe(`/api/purchases/${purchaseId}/receipt`);
   });
 
-  it('should download the receipt as a PDF', async () => {
+  it('debería descargar el recibo como un PDF', async () => {
     const purchaseId = await aCashPurchase();
 
     const response = await request(app)
