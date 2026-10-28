@@ -261,8 +261,8 @@ sequenceDiagram
         Compra->>Tarifa: precioPara(tipoPase), descuentoPara(edad)
         Tarifa-->>Compra: precio y descuento
     end
-    Note right of Compra: valida cantidad y edades; estado PENDIENTE_PAGO
-    Gestor->>Gestor: validarLimitePorFecha(entradasActivas + cantidad <= 10)
+    Note right of Compra: valida cantidad y edades, estado PENDIENTE_PAGO
+    Gestor->>Gestor: validarLimitePorFecha(entradasActivas + cantidad menor o igual a 10)
     Gestor->>Gestor: guardar(nueva:Compra)
     Gestor->>MP: crearPago(nueva:Compra)
     MP-->>Gestor: redirectUrl
@@ -300,8 +300,8 @@ sequenceDiagram
         Compra->>Tarifa: precioPara(tipoPase), descuentoPara(edad)
         Tarifa-->>Compra: precio y descuento
     end
-    Note right of Compra: valida cantidad y edades; estado CONFIRMADA_PAGO_EN_BOLETERIA
-    Gestor->>Gestor: validarLimitePorFecha(entradasActivas + cantidad <= 10)
+    Note right of Compra: valida cantidad y edades, estado CONFIRMADA_PAGO_EN_BOLETERIA
+    Gestor->>Gestor: validarLimitePorFecha(entradasActivas + cantidad menor o igual a 10)
     Gestor->>Gestor: guardar(nueva:Compra)
     Gestor->>Mailer: enviarReservaConQRyComprobante(nueva:Compra)
     Note right of Mailer: si falla, se registra el error y la compra no se revierte
