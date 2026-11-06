@@ -4,7 +4,7 @@ import { SimulatedMailbox } from './infra/simulated-mailbox';
 import { SimulatedPaymentGateway } from './infra/simulated-payment-gateway';
 import { SystemClock } from './infra/system-clock';
 
-// Registered users. Login is out of scope (FAQ 19), so there is a single mock visitor.
+// usuarios registrados. El login esta fuera de alcance (FAQ 19), asi que hay un solo visitante mockeado.
 const users = [
   { id: 'visitor-1', email: 'ana.perez@correo.com', name: 'Ana Pérez' },
 ];
