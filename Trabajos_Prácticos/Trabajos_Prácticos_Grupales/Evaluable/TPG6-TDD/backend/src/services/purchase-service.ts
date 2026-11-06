@@ -5,6 +5,7 @@ import { Purchase, Ticket, type TicketRequest } from '../domain/purchase';
 import { PassType, PaymentMethod, PurchaseStatus } from '../domain/types';
 import type { Dependencies, EmailKind } from './dependencies';
 
+/**El maximo numero de tickets que puede ser comprado por fecha.(En las reglas de negocio estaba mal escrito) */
 const MAX_TICKETS_PER_DATE = 10;
 
 export interface PurchaseTicketsRequest {
@@ -109,7 +110,7 @@ export function quotePurchase(tickets: TicketRequest[]): Quote {
   };
 }
 
-// Dates where the user already has 10 active tickets are left out, since nothing more fits (FAQ 27).
+// Fechas donde el usuario ya tiene 10 tickets activos se dejan afuera, ya que no entra nada más (FAQ 27).
 export function getAvailableDates(
   userId: string,
   deps: Dependencies,
@@ -126,7 +127,7 @@ function findPurchaseOrFail(purchaseId: string, deps: Dependencies): Purchase {
   return purchase;
 }
 
-// The email is not part of the purchase: if it fails, the purchase stays registered (RC-04).
+// El Mail no es parte de la compra: si falla, la compra queda registrada (RC-04).
 async function sendEmail(
   deps: Dependencies,
   kind: EmailKind,
@@ -181,7 +182,7 @@ const EMAIL_KIND_BY_STATUS: Partial<Record<PurchaseStatus, EmailKind>> = {
   [PurchaseStatus.RECHAZADA]: 'PAYMENT_REJECTED',
 };
 
-/** The email sent for the purchase in its current status, built from the stored purchase. */
+// El mail enviado por la compra en su estado actual, construido a partir de la compra almacenada.
 export function getPurchaseEmail(
   purchaseId: string,
   deps: Dependencies,
