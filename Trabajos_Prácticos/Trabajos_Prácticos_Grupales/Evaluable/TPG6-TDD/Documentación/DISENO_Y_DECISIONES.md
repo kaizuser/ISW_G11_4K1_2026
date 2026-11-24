@@ -318,7 +318,7 @@ sequenceDiagram
 | **Unitario** (núcleo del TDD) | Reglas del dominio y servicios: precios, descuentos, fechas, límites, estados, redirección a Mercado Pago y envío del correo. Sin red ni reloj real. | `backend/test/unit/` |
 | **End-to-end** | Rutas con `supertest`: códigos HTTP, validación del request, sesión simulada y errores. | `backend/test/e2e/` |
 
-* Toda regla nace de un test en rojo y se commitea por fase (`test:`, `feat:`, `refactor:`), según `GUIA_DE_ESTILO.md`.
+* Toda regla nace de un test en rojo y se commitea por fase (`test:`/`RED`, `feat:`/`GREEN`, `refactor:`/`REFACTOR`), según `GUIA_DE_ESTILO.md`.
 * Valores límite obligatorios: edades 0, 3, 4, 15, 16, 59 y 60; cantidades 0, 1, 10 y 11; horas 17:30 y 17:31; fin de mes para el horizonte.
 * El QR y el PDF se verifican manualmente en la demostración, junto con el recorrido completo de PU-OF-01.
 
@@ -366,4 +366,4 @@ sequenceDiagram
 
 **D-13 — Interfaz (FAQ 2, 3, 17 y 24).** Web responsive *mobile-first*, paleta del PO como tokens de Tailwind, tipografía Lato y logo propio validado por el PO. El calendario solo habilita las fechas que devuelve el backend, y los totales se piden a `/quote`, para no duplicar reglas en el frontend.
 
-**D-14 — Commits por fase de TDD.** Un commit `test:` (rojo), uno `feat:` (verde) y, si hubo mejora, uno `refactor:` por cada ítem de la lista de tests. El historial de Git queda como evidencia de que cada test se escribió antes que su código. El resto del repositorio mantiene la convención del Plan de Gestión de Configuración (TPG4).
+**D-14 — Commits por fase de TDD.** Un commit de rojo, uno de verde y, si hubo mejora, uno de refactor por cada ítem de la lista de tests. Se admiten dos formatos equivalentes para marcar la fase: Conventional Commits (`test:`, `feat:`, `refactor:`) o el formato del Plan con la fase explícita (`<Legajo>_<Apellido>_RED|GREEN|REFACTOR`). El historial de Git queda como evidencia de que cada test se escribió antes que su código. El resto del repositorio mantiene la convención del Plan de Gestión de Configuración (TPG4).

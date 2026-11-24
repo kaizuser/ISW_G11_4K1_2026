@@ -100,13 +100,19 @@ La estructura de carpetas está en `DISENO_Y_DECISIONES.md`, sección 3.
 ## 8. Commits y Ramas
 
 * Rama de trabajo: `feature/TP6-TDD-ComprarEntradas`.
-* Los commits que modifican `TPG6-TDD/` usan **Conventional Commits**; el resto del repositorio mantiene el formato `<Legajo>_<Apellido>_<Descripción>` del Plan de Gestión de Configuración (TPG4).
-* El tipo va en inglés y la descripción en español, en tercera persona del presente. Sin atribuciones automáticas de herramientas de IA.
+* Los commits que modifican `TPG6-TDD/` admiten **dos formatos equivalentes**; el resto del repositorio mantiene el formato `<Legajo>_<Apellido>_<Descripción>` del Plan de Gestión de Configuración (TPG4).
+  * **Conventional Commits:** `<tipo>: <descripción>`. El tipo va en inglés y la descripción en español, en tercera persona del presente.
+  * **Formato del Plan con fase TDD:** `<Legajo>_<Apellido>_<FASE> <componente>: <descripción>`, donde `<FASE>` es `RED`, `GREEN` o `REFACTOR`. Los commits que no corresponden a una fase del ciclo (configuración, documentación, infraestructura) usan el formato general `<Legajo>_<Apellido>_<Descripción>`.
+* Sin atribuciones automáticas de herramientas de IA.
 * **Un commit por fase del ciclo TDD**, para que el historial demuestre que cada test se escribió antes que su código:
-  * `test:` el test nuevo falla por la razón esperada (rojo).
-  * `feat:` el código mínimo que lo hace pasar (verde).
-  * `refactor:` mejora sin cambio de comportamiento, solo si la hubo.
-  * `chore:`, `docs:`, `build:` para configuración, documentación y dependencias.
+
+  | Fase | Conventional Commits | Formato del Plan |
+  | :--- | :--- | :--- |
+  | Rojo: el test nuevo falla por la razón esperada | `test:` | `RED` |
+  | Verde: el código mínimo que lo hace pasar | `feat:` | `GREEN` |
+  | Refactor: mejora sin cambio de comportamiento, solo si la hubo | `refactor:` | `REFACTOR` |
+  | Configuración, documentación y dependencias | `chore:`, `docs:`, `build:` | formato general |
+
   ```text
   test: agrega descuento del 50% para menores de 15 años (CA-12)
   feat: implementa descuento del 50% para menores de 15 años (CA-12)

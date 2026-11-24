@@ -116,3 +116,5 @@ Siendo <NN> Número cardinal comenzando en 01 y <EVENTO> corresponde a alguno de
 Con el propósito de asegurar la consistencia entre contribuciones y garantizar la trazabilidad de la autoría, todo mensaje de commit deberá estructurarse de acuerdo con la siguiente guía de formato:
 
 `<Legajo>_<Apellido>_<Descripción breve del cambio>`
+
+**Excepción — TPG6 (TDD):** los commits que modifican `Trabajos_Prácticos/Trabajos_Prácticos_Grupales/Evaluable/TPG6-TDD/` admiten además el formato Conventional Commits, con el fin de registrar en el historial las fases del ciclo TDD. El detalle se encuentra en `TPG6-TDD/Documentación/GUIA_DE_ESTILO.md` (sección 8).
